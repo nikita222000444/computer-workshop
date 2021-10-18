@@ -1,179 +1,116 @@
-// This is a personal academic project. Dear PVS-Studio, please check it.
-
-// PVS-Studio Static Code Analyzer for C, C++, C#, and Java: http://www.viva64.com
-
-#include <stdio.h>
-#include <stdlib.h>
-#include <math.h> // Стандартная математическая библиотека
-
+#include<math.h>
+#include<stdio.h>
 #include "functions.h"
+#include <stdlib.h>
 
-int EvenCount(int t_)
+double TaskOne()
 {
-   // Количество четных цифр
-   int count = 0;
+   int a = 1;
+   int x = 1;
+   int c = 1;
+   double L = (sqrt(exp(x) - pow(cos(pow(x, 2) * pow(a, 5)), 4)) + pow(atan(a - pow(x, 5)), 4)) / (exp(1) * sqrt(abs(a + x * pow(c, 4))));
+   return L;
+}
 
-   // Берём последнюю цифру числа t_ и смотрим её чётность
-   while (t_ != 0)
+double TaskTwo(double t_)
+{
+   double V = 3 * t_ * t_ - 6 * t_;
+   return V;
+}
+
+double TaskThree(double a_,double b_, double c_)
+{
+   double x = 0;
+   double x1 = 0;
+   double x2 = 0;
+   double D = b_ * b_ - 4 * a_ * c_;
+   if (D < 0)
    {
-      // Последняя цифра в числе
-      int x = t_ % 10;
-
-      if (x % 2 == 0)
-         count++;
-
-      t_ /= 10; // t_ = t_ / 10;
-   }
-
-   return count;
-}
-
-int PI(int x_)
-{
-   // Обработаем исключения: проверим x_ < 2
-   if (x_ < 2)
-      return 0;
-
-   int count = 0;
-
-   for (unsigned int number = 2; number != x_; ++number)
-      if (IsPrime(number))
-         ++count;
-
-   return count;
-}
-
-bool IsPrime(int number_)
-{
-   // Обработаем исключения: проверим number_ на отрицательность
-   if (number_ < 2)
-      return false;
-
-   unsigned int nSqrt = (int)sqrt(number_) + 1; // т.к ф-я sqrt возвращает тип double, а нам нужно целое, то "приводим тип" к нужному с помощью (int)
-
-   if (number_ == 2)
-      return true;
-
-   if (number_ % 2 == 0)
-      return false;
-
-   for (unsigned int i = 3; i <= nSqrt; i += 2)
+      printf("No real solutions");
+   }if (D == 0)
    {
-      if (number_ % i == 0)
-         return false;
+      x = (-b_) / (2 * a_);
+      return x;
    }
-
-   return true;
-}
-
-int FI(int x_)
-{
-   if (x_ < 1)
-      return 0;
-
-   int count = 0;
-
-   for (int i = 1; i < x_; ++i)
-      if (Gcd(i, x_) == 1)
-         ++count;
-
-   return count;
-}
-
-int Gcd(int a, int b)
-{
-   if (a < 0)
-      a = abs(a);
-
-   if (b < 0)
-      b = abs(b);
-
-   while (a != b)
+   
+   if (D > 0)
    {
-      if (a > b)
-         a -= b;
-      else
-         b -= a;
+      x1 = ((-b_) - sqrt(D)) / (2 * a_);
+      x2 = ((-b_) + sqrt(D)) / (2 * a_);
+      return x1, x2;
    }
-
-   return a;
 }
 
-unsigned long long Fact(int x_)
+double TaskFour(int x_,double sec_) //�������� ������� ������ � ��������
 {
-   if (x_ < 0)
+   switch (x_)
    {
-      printf("В функцию Fact поступило отрицательно значение %d\n", x_);
-      exit(1);
+   case 48:
+      return 15 * (sec_ / 60); break;
+   case 44:
+      return 18 * (sec_ / 60); break;
+   case 46:
+      return 13 * (sec_ / 60); break;
+   case 45:
+      return 11 * (sec_ / 60); break;
    }
-
-   if (x_ == 0)
-      return 1;
-
-   unsigned long long res = 1;
-
-   for (int i = 1; i <= x_; ++i)
-      res *= i;
-
-   return res;
 }
 
-unsigned long long DFact(int x_)
+int TaskFive()
 {
-   if (x_ < 0)
+   for (int i = 1000; i < 10000; ++i)
    {
-      printf("В функцию DFact поступило отрицательно значение %d\n", x_);
-      exit(1);
+      int num = i;
+      int x4 = num % 10;
+      num = num / 10;
+      
+      int x3 = num % 10;
+      num = num / 10; 
+      
+      int x2 = num % 10;
+      num = num / 10;
+      
+      int x1 = num % 10;
+      
+      if (x1 * x1 * x1 * x1 + x2 * x2 * x2 * x2 + x3 * x3 * x3 * x3 + x4 * x4 * x4 * x4 == i)
+         return i;
    }
-
-   if (x_ == 0)
-      return 1;
-
-   unsigned long long res = 1;
-
-   int i = 0;
-   if (x_ % 2 == 0)
-      i = 2;
-   else
-      i = 1;
-
-   for (; i <= x_; i += 2)
-      res *= i;
-
-   return res;
 }
 
-unsigned long long Euler_2(int x_)
+int TaskSix()
 {
-   unsigned long long sum = 0;
-
-   unsigned long long prev = 0;
-   unsigned long long cur = 1;
-
-   while (cur <= x_)
+   int* arr;
+   int n = 0;
+   scanf_s("%d", &n);
+   arr = malloc(n * sizeof(int));
+   for (int i = 0; i < n; ++i)
    {
-      if (cur % 2 == 0)
-         sum += cur;
-
-      unsigned long long next = cur + prev;
-
-      prev = cur;
-      cur = next;
+      scanf_s("%d", &arr[i]);
    }
-
-   return sum;
+   int num = 0;
+   for (int i = 0; i < n; ++i)
+   {
+      num += pow(2, i) * arr[n - 1 - i];
+   }
+   return num;
 }
 
-unsigned long long Fib(int n_)
-{
-   if (n_ < 0)
-   {
-      printf("Ошибка входного параметра Fib(%d)", n_);
-      exit(1);
-   }
-
-   if (n_ < 2)
-      return n_;
-
-   return Fib(n_ - 1) + Fib(n_ - 2);
-}
+//int TaskSeven()
+//{
+//   int* L;
+//   int n = 0;
+//   int m = 0;
+//   scanf_s("%d%d", n, m);
+//   L = malloc(n * sizeof(int));
+//   for (int i = 0; i < n; ++i)
+//   {
+//      L[i] = malloc(m * sizeof(int));
+//   }
+//   for (int i = 0; i < n; ++n)
+//   {
+//      for (int j = 0; j < m; ++j)
+//      {
+//
+//      }
+//   }
+//}

@@ -1,8 +1,8 @@
-#include<math.h>
-#include<stdio.h>
+#include <math.h>
+#include <stdio.h>
 #include "functions.h"
 #include <stdlib.h>
-
+#include <time.h>
 double TaskOne()
 {
    int a = 1;
@@ -77,40 +77,46 @@ int TaskFive()
    }
 }
 
-int TaskSix()
+int TaskSix(x_)
 {
    int* arr;
-   int n = 0;
-   scanf_s("%d", &n);
-   arr = malloc(n * sizeof(int));
-   for (int i = 0; i < n; ++i)
+   int c = 0;
+   int y = x_;
+   while (y > 0)
    {
-      scanf_s("%d", &arr[i]);
+      ++c;
+      y /= 10;
+   }
+   arr = malloc(c * sizeof(int));
+   for (int i = c - 1; i >= 0; --i)
+   {
+      arr[i] = x_ % 10;
+      x_ /= 10;
    }
    int num = 0;
-   for (int i = 0; i < n; ++i)
+   for (int i = 0; i < c; ++i)
    {
-      num += pow(2, i) * arr[n - 1 - i];
+      num += pow(2, i) * arr[c - 1 - i];
    }
    return num;
 }
 
-//int TaskSeven()
-//{
-//   int* L;
-//   int n = 0;
-//   int m = 0;
-//   scanf_s("%d%d", n, m);
-//   L = malloc(n * sizeof(int));
-//   for (int i = 0; i < n; ++i)
-//   {
-//      L[i] = malloc(m * sizeof(int));
-//   }
-//   for (int i = 0; i < n; ++n)
-//   {
-//      for (int j = 0; j < m; ++j)
-//      {
-//
-//      }
-//   }
-//}
+int TaskSeven(int n_, int m_)
+{
+   srand(time(NULL));
+   int** L = (int**)malloc(n_ * sizeof(int*));
+   for (int i = 0; i < n_; i++)
+   {
+      L[i] = (int*)malloc(m_ * sizeof(int));
+   }
+   for (int i = 0; i < n_; ++i)
+   {
+      for (int j = 0; j < m_; ++j)
+      {
+         L[i][j] = (rand() % 21) - 10;
+         L[i][j] *= (-3);
+         printf("%d ", L[i][j]);
+      }
+      printf("\n");
+   }
+}

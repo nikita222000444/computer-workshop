@@ -166,23 +166,20 @@ void f_to_g(FILE *f, FILE *g)
          if (str[i] == ' ')
             n++;
 
-         if (n == 4)
+         if (n == 3)
          {
-            n = 0;
-            while (str[i] != ' ')
+            while (str[i + 1] != ' ')
                continue;
+            n = -1;
+            continue;
          }
 
-         if (str[i] != 'ï')
-         {
-            while (str[i] != ' ')
-               fprintf(g, "%c", str[i]);
-         }
-         else
+         if (str[i] == 'ï')
          {
             while (str[i] != ' ')
                continue;
          }
+         fprintf(g, "%c", str[i]);
       }
    }
    fclose(f);
@@ -195,7 +192,7 @@ int main()
 {
    setlocale(LC_ALL, "Russian");
 
-   char str[] = "wwaw kuw tot etot ukudfe";
+   char str[] = "wwaw kuw tot etot ukudfe fg rhr htht fgtrht thttj tjjtjt gr grg rhrh rh";
    char* FinStr = Replace(str);
    for (int i = 0; i < strlen(str); i++)
       printf("%c",FinStr[i]);
